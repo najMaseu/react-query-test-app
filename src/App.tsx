@@ -1,21 +1,22 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-import React from 'react';
+import { jsx } from "@emotion/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { appStyles } from "./App.styles";
+import { CatImageGenerator } from "./comonents/CatImageGenerator";
 
-export const App: React.FC = () => {
+const queryClient = new QueryClient();
+
+export const App = () => {
   return (
-    <div css={css(
-      {
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }
-    )}>
-     Hello
-    </div>
+    // Provide the client to your App
+    <QueryClientProvider client={queryClient}>
+      <div css={appStyles}>
+        <h1>CATS!!!!!</h1>
+        <CatImageGenerator />
+      </div>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
-}
-
+};
